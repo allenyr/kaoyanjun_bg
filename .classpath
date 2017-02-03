@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="melibrary.com.genuitec.eclipse.j2eedt.core.MYECLIPSE_JAVAEE_6_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="lib" path="G:/android/myworkspace/Web/WebRoot/WEB-INF/lib/commons-fileupload-1.2.1.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="G:/android/myworkspace/Web/WebRoot/WEB-INF/lib/commons-io-1.4.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="G:/android/myworkspace/Web/WebRoot/WEB-INF/lib/fastjson-1.1.34.android.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="G:/android/myworkspace/Web/WebRoot/WEB-INF/lib/jspsmartupload_zh.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="G:/android/myworkspace/Web/WebRoot/WEB-INF/lib/dom4j.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="G:/android/myworkspace/Web/WebRoot/WEB-INF/lib/mysql-connector-java-5.1.38-bin.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="G:/android/myworkspace/Web/WebRoot/WEB-INF/lib/nineoldandroids-2.4.0.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="G:/android/myworkspace/Web/WebRoot/WEB-INF/lib/json/commons-beanutils-1.8.0.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="G:/android/myworkspace/Web/WebRoot/WEB-INF/lib/json/commons-collections-3.2.1.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="G:/android/myworkspace/Web/WebRoot/WEB-INF/lib/json/commons-lang-2.5.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="G:/android/myworkspace/Web/WebRoot/WEB-INF/lib/json/commons-logging-1.1.1.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="G:/android/myworkspace/Web/WebRoot/WEB-INF/lib/json/ezmorph-1.0.6.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="G:/android/myworkspace/Web/WebRoot/WEB-INF/lib/json/json-lib-2.4-jdk15.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="G:/android/myworkspace/Web/WebRoot/WEB-INF/lib/tomcat-coyote.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/commons-io-1.4.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6">
+		<attributes>
+			<attribute name="owner.project.facets" value="java"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="G:/android/myworkspace/Web/WebRoot/WEB-INF/lib/jiguang-common-0.1.5.jar"/>
+	<classpathentry kind="lib" path="G:/android/myworkspace/Web/WebRoot/WEB-INF/lib/log4j-1.2.17.jar"/>
+	<classpathentry kind="lib" path="G:/android/myworkspace/Web/WebRoot/WEB-INF/lib/slf4j-api-1.7.7.jar"/>
+	<classpathentry kind="lib" path="G:/android/myworkspace/Web/WebRoot/WEB-INF/lib/slf4j-log4j12-1.7.7.jar"/>
+	<classpathentry kind="lib" path="G:/android/myworkspace/Web/WebRoot/WEB-INF/lib/gson-2.3.jar"/>
+	<classpathentry kind="lib" path="G:/android/myworkspace/Web/WebRoot/WEB-INF/lib/jpush-client-3.2.10.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Administrator/.m2/repository/cn/jpush/api/jiguang-common/0.1.3/jiguang-common-0.1.3.jar" sourcepath="C:/Users/Administrator/.m2/repository/cn/jpush/api/jiguang-common/0.1.3/jiguang-common-0.1.3-sources.jar">
+		<attributes>
+			<attribute name="maven.groupId" value="cn.jpush.api"/>
+			<attribute name="maven.artifactId" value="jiguang-common"/>
+			<attribute name="maven.version" value="0.1.3"/>
+			<attribute name="maven.scope" value="compile"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
+</classpath>
