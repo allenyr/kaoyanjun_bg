@@ -11,7 +11,7 @@ import java.util.List;
 
 import Model.MicroBlog;
 import Model.Question;
-import Model.Users;
+import Model.UserInfoDataBean;
 
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;

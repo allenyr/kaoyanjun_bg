@@ -10,7 +10,8 @@ import java.util.List;
 
 import javax.enterprise.inject.New;
 
-import Model.Users;
+import Model.UserInfoBean;
+import Model.UserInfoDataBean;
 
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
@@ -53,7 +54,7 @@ public class DaoUsers {
 	}
 	
 	//插入
-	public static int insert(String table,Users users) {
+	public static int insert(String table,UserInfoDataBean users) {
 	    Connection conn = getConn();
 	    int i = 0;
 	    String sql = "insert into "+table+" (username,password,headurl,phone,sex,address,money,signa,messagenum) values(?,?,?,?,?,?,?,?,?)";
@@ -231,9 +232,9 @@ public class DaoUsers {
 	}
 	
 	//返回个人信息
-	public static List<Users> usernameGetUserList(String table,String phone) {
-		List<Users> lUsers = new ArrayList<Users>();
-		Users users = new Users();
+	public static UserInfoDataBean usernameGetUserList(String table,String phone) {
+//		UserInfoBean userInfoBean = new UserInfoBean();
+		UserInfoDataBean userInfoDataBean = new UserInfoDataBean();
 	    Connection conn = getConn();
 	    String sql = "select id,username,password,headurl,phone,sex,address,money,signa,messagenum from "+table+" where phone='"+phone+"'";
 	    PreparedStatement pstmt;
@@ -246,44 +247,44 @@ public class DaoUsers {
 	                String data = rs.getString(i);
 	                switch (i) {
 	                case 1:
-	                	users.setId(Integer.parseInt(data));
+	                	userInfoDataBean.setId(Integer.parseInt(data));
 	                	break;
 	                case 2:			
-						users.setUsername(data);
+	                	userInfoDataBean.setUsername(data);
 						break;
 					case 3:
-						users.setPassword(data);
+						userInfoDataBean.setPassword(data);
 						break;
 					case 4:			
-						users.setHeadurl(data);
+						userInfoDataBean.setHeadurl(data);
 						break;
 					case 5:			
-						users.setPhone(data);
+						userInfoDataBean.setPhone(data);
 						break;
 					case 6:			
-						users.setSex(data);
+						userInfoDataBean.setSex(data);
 						break;
 					case 7:			
-						users.setAddress(data);
+						userInfoDataBean.setAddress(data);
 						break;
 					case 8:			
-						users.setMoney(Integer.parseInt(data));
+						userInfoDataBean.setMoney(Integer.parseInt(data));
 						break;
 					case 9:			
-						users.setSigna(data);
+						userInfoDataBean.setSigna(data);
 						break;
 					case 10:			
-//						users.setMessagenum(DaoMessage.getMaxId(users.getId()+""));
-						users.setMessagenum(Integer.parseInt(data));
-						
+						userInfoDataBean.setMessagenum(Integer.parseInt(data));
 						break;
 					default:
 						break;
 					}
 	        	}
             }
-	        lUsers.add(users);
-	        return lUsers;
+//	        userInfoBean.setData(userInfoDataBean);
+//	        userInfoBean.setStatus(1);
+//	        userInfoBean.setInfo("success");
+	        return userInfoDataBean;
 	     
 	    } catch (SQLException e) {
 	        e.printStackTrace();
@@ -292,9 +293,9 @@ public class DaoUsers {
 	}
 	
 	//返回个人信息(资料卡)
-	public static List<Users> usernameGetUserList(String table,int id) {
-		List<Users> lUsers = new ArrayList<Users>();
-		Users users = new Users();
+	public static List<UserInfoDataBean> usernameGetUserList(String table,int id) {
+		List<UserInfoDataBean> lUsers = new ArrayList<UserInfoDataBean>();
+		UserInfoDataBean users = new UserInfoDataBean();
 	    Connection conn = getConn();
 	    String sql = "select id,username,password,headurl,phone,sex,address,money,signa from "+table+" where id="+id;
 	    PreparedStatement pstmt;
@@ -348,8 +349,8 @@ public class DaoUsers {
 	}
 	
 	//遍历用户信息
-	public static List<Users> getUserList(String table) {
-		List<Users> lUsers = new ArrayList<Users>();
+	public static List<UserInfoDataBean> getUserList(String table) {
+		List<UserInfoDataBean> lUsers = new ArrayList<UserInfoDataBean>();
 	    Connection conn = getConn();
 	    String sql = "select * from "+table+"";
 	    PreparedStatement pstmt;
@@ -358,7 +359,7 @@ public class DaoUsers {
 	        ResultSet rs = pstmt.executeQuery();
 	        int col = rs.getMetaData().getColumnCount();
 	        while (rs.next()) {
-	        	Users users = new Users();
+	        	UserInfoDataBean users = new UserInfoDataBean();
 	        	for (int i = 1; i <= col; i++) {
 	                String data = rs.getString(i);
 	                switch (i) {

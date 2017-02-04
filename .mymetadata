@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-module
   type="WEB"
-  name="Web"
+  name="kaoyanjunServer"
   id="myeclipse.1462252176157"
   context-root="/Web"
   j2ee-spec="6.0"
-  archive="Web.war">
+  archive="kaoyanjunServer.war">
   <attributes>
     <attribute name="webrootdir" value="WebRoot" />
   </attributes>

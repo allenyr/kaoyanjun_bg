@@ -2,7 +2,7 @@ package globle;
 
 public class Constant {
 	
-	public static final boolean LOCAL = true; 
+	public static final boolean LOCAL = false; 
 	public static final String HEAD_LOCAL_PATH = "E:\\apache-tomcat-7.0.68\\webapps\\ROOT\\head\\";
 	public static final String HEAD_SERVER_PATH = "C:\\Program Files\\apache-tomcat-7.0.69\\webapps\\ROOT\\head\\";
 	public static final String HEAD_PATH = LOCAL ? HEAD_LOCAL_PATH : HEAD_SERVER_PATH; 

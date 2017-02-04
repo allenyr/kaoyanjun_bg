@@ -17,7 +17,7 @@ import java.util.List;
 import javax.enterprise.inject.New;
 
 import Model.Infom;
-import Model.Users;
+import Model.UserInfoDataBean;
 
 public class FileUtils {
 	
