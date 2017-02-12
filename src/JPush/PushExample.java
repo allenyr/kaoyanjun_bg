@@ -69,6 +69,8 @@ public class PushExample {
 	}
     
 	public static void testSendPush(String alias,String alert) {
+		System.out.println("alias="+alias);
+		System.out.println("alert="+alert);
 	    // HttpProxy proxy = new HttpProxy("localhost", 3128);
 	    // Can use this https proxy: https://github.com/Exa-Networks/exaproxy
 		ClientConfig clientConfig = ClientConfig.getInstance();
@@ -80,10 +82,12 @@ public class PushExample {
         
         try {
             PushResult result = jpushClient.sendPush(payload);
+            System.out.println("PushResult="+result);
             LOG.info("Got result - " + result);
             
         } catch (APIConnectionException e) {
             LOG.error("Connection error. Should retry later. ", e);
+            System.out.println("APIConnectionException="+e);
             
         } catch (APIRequestException e) {
             LOG.error("Error response from JPush server. Should review and fix it. ", e);
@@ -91,6 +95,7 @@ public class PushExample {
             LOG.info("Error Code: " + e.getErrorCode());
             LOG.info("Error Message: " + e.getErrorMessage());
             LOG.info("Msg ID: " + e.getMsgId());
+            System.out.println("APIRequestException="+e);
         }
 	}
 	

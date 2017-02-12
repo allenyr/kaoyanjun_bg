@@ -11,14 +11,18 @@ public class UserInfoDataBean {
     private  int money;
     private  String signa;
     private  int messagenum;
+    private String longitude;
+    private String latitude;
     
     public UserInfoDataBean() {
 
 	}
    
-    public UserInfoDataBean(String username, String password, String headurl,
-			String phone, String sex, String address, int money, String signa,
-			int messagenum) {
+   
+	public UserInfoDataBean(String username, String password,
+			String headurl, String phone, String sex, String address,
+			int money, String signa, int messagenum, String longitude,
+			String latitude) {
 		super();
 		this.username = username;
 		this.password = password;
@@ -29,11 +33,26 @@ public class UserInfoDataBean {
 		this.money = money;
 		this.signa = signa;
 		this.messagenum = messagenum;
+		this.longitude = longitude;
+		this.latitude = latitude;
 	}
-    
-    
-   
-    
+
+	public String getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(String longitude) {
+		this.longitude = longitude;
+	}
+
+	public String getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(String latitude) {
+		this.latitude = latitude;
+	}
+
 	public int getMessagenum() {
 		return messagenum;
 	}

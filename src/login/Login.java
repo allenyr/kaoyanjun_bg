@@ -135,6 +135,8 @@ public class Login extends HttpServlet {
 	private static final int WHAT_CHAT= 46;
 	private static final int NEW_WHAT_QQUSER_JUDGE = 47;
 	private static final int NEW_WHAT_Clear_Message_Num = 48;
+	private static final int WHAT_UPDATE_LOCATION = 49;
+	private static final int WHAT_GET_USERLIST = 50;
 	
 	private List<MicroBlog> microBlogList = new ArrayList<MicroBlog>();
 	private List<Infom> filelist = new ArrayList<Infom>(); 
@@ -198,17 +200,19 @@ public class Login extends HttpServlet {
 				phone = request.getParameter("param1");
 				password = request.getParameter("param2");
 				int i = DaoUsers.Rechecking(DaoUsers.STABLE_NAME, phone, password);
+				System.out.println(what);
 				switch(i){
 					case 1:
-//						outputStream.write("登录成功".getBytes("utf-8"));
 						//返回个人数据
 						getUserData(phone,"login");
 						break;
 					case 2:
-						outputStream.write("密码错误".getBytes("utf-8"));
+						getUserData(phone,"密码错误");
+//						outputStream.write("密码错误".getBytes("utf-8"));
 						break;
 					case 3:
-						outputStream.write("没有此用户".getBytes("utf-8"));
+						getUserData(phone,"没有此用户");
+//						outputStream.write("没有此用户".getBytes("utf-8"));
 						break;
 				}
 				break;
@@ -219,7 +223,7 @@ public class Login extends HttpServlet {
 				phone = request.getParameter("param3");
 				if(!phone.equals("")&&phone!=null){
 					if(DaoUsers.Assign(DaoUsers.STABLE_NAME, phone)){
-						DaoUsers.insert(DaoUsers.STABLE_NAME,new UserInfoDataBean("ID"+(DaoUsers.getMaxId()+1), password, headurl, phone,"男","中国",0,"",0));
+						DaoUsers.insert(DaoUsers.STABLE_NAME,new UserInfoDataBean("ID"+(DaoUsers.getMaxId()+1), password, headurl, phone,"男","中国",0,"",0,116.46+(int)(1+Math.random()*10)+"",39.92+(int)(1+Math.random()*10)+""));
 						outputStream.write("注册成功".getBytes("utf-8"));
 					}
 					else {
@@ -694,6 +698,7 @@ public class Login extends HttpServlet {
 				//删除问题
 			case WHAT_DELETE_QUESTION:
 				questionId = request.getParameter("param1");
+				System.out.println("questionId="+questionId);
 				DaoQuestion.delete(DaoQuestion.STABLE_NAME, questionId);
 				outputStream.write("删除成功".getBytes("utf-8"));
 				break;
@@ -763,7 +768,7 @@ public class Login extends HttpServlet {
 				if(!phone.equals("")&&phone!=null){
 					//注册
 					if(DaoUsers.Assign(DaoUsers.STABLE_NAME, phone)){
-						DaoUsers.insert(DaoUsers.STABLE_NAME,new UserInfoDataBean(username, password, headurl, phone, sex,address,0,"",0));
+						DaoUsers.insert(DaoUsers.STABLE_NAME,new UserInfoDataBean(username, password, headurl, phone, sex,address,0,"",0,116.46+(int)(1+Math.random()*10)+"",39.92+(int)(1+Math.random()*10)+""));
 						System.out.println("注册成功");
 						//返回个人数据
 						getUserData(phone,"assign");
@@ -785,7 +790,18 @@ public class Login extends HttpServlet {
 				DaoUsers.clearUnreadMessage(DaoUsers.STABLE_NAME,Integer.parseInt(id));
 				outputStream.write("done".getBytes("utf-8"));
 				break;
-		
+			
+			case WHAT_UPDATE_LOCATION:
+				id = request.getParameter("param1");
+				String longitude = request.getParameter("param2");
+				String latitude = request.getParameter("param3");
+				DaoUsers.updateLocation(DaoUsers.STABLE_NAME,Integer.parseInt(id),longitude,latitude);
+				outputStream.write("done".getBytes("utf-8"));
+				break;
+				
+			case WHAT_GET_USERLIST:
+				getUserListData(DaoUsers.getUserList(DaoUsers.STABLE_NAME));
+				break;
 		}
 		
 	}
@@ -811,8 +827,23 @@ public class Login extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-		
 	}
+	
+	//获取所有用户数据
+	private void getUserListData(List<UserInfoBean> uInfoBeans){
+		String json = JsonUtils.toJson(uInfoBeans);
+		System.out.println(json.toString()); 
+		try {
+			outputStream.write(json.toString().getBytes("utf-8"));
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	//获取评论
 	private void  getComment(String position) {
 		DaoComment.creatCommentTable(position);

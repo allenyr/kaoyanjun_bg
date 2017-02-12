@@ -3,8 +3,8 @@
     <wb-module deploy-name="kaoyanjunServer">
         <wb-resource deploy-path="/" source-path="/WebRoot" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
-        <property name="context-root" value="/Web"/>
         <property name="java-output-path" value="/kaoyanjunServer/WebRoot/WEB-INF/classes"/>
         <property name="me-merge-utility-modules" value="true"/>
+        <property name="context-root" value="/kaoyanjunServer"/>
     </wb-module>
 </project-modules>

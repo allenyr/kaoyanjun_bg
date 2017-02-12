@@ -57,7 +57,7 @@ public class DaoUsers {
 	public static int insert(String table,UserInfoDataBean users) {
 	    Connection conn = getConn();
 	    int i = 0;
-	    String sql = "insert into "+table+" (username,password,headurl,phone,sex,address,money,signa,messagenum) values(?,?,?,?,?,?,?,?,?)";
+	    String sql = "insert into "+table+" (username,password,headurl,phone,sex,address,money,signa,messagenum,longitude,latitude) values(?,?,?,?,?,?,?,?,?,?,?)";
 	    PreparedStatement pstmt;
 	    try {
 	        pstmt = (PreparedStatement) conn.prepareStatement(sql);
@@ -70,6 +70,8 @@ public class DaoUsers {
 	        pstmt.setInt(7, users.getMoney());
 	        pstmt.setString(8, users.getSigna());
 	        pstmt.setInt(9, users.getMessagenum());
+	        pstmt.setString(10, users.getLongitude());
+	        pstmt.setString(11, users.getLatitude());
 	        i = pstmt.executeUpdate();
 	        pstmt.close();
 	        conn.close();
@@ -236,7 +238,7 @@ public class DaoUsers {
 //		UserInfoBean userInfoBean = new UserInfoBean();
 		UserInfoDataBean userInfoDataBean = new UserInfoDataBean();
 	    Connection conn = getConn();
-	    String sql = "select id,username,password,headurl,phone,sex,address,money,signa,messagenum from "+table+" where phone='"+phone+"'";
+	    String sql = "select id,username,password,headurl,phone,sex,address,money,signa,messagenum,longitude,latitude from "+table+" where phone='"+phone+"'";
 	    PreparedStatement pstmt;
 	    try {
 	    	pstmt = (PreparedStatement)conn.prepareStatement(sql);
@@ -246,36 +248,42 @@ public class DaoUsers {
 	        	for (int i = 1; i <= col; i++) {
 	                String data = rs.getString(i);
 	                switch (i) {
-	                case 1:
-	                	userInfoDataBean.setId(Integer.parseInt(data));
-	                	break;
-	                case 2:			
-	                	userInfoDataBean.setUsername(data);
-						break;
-					case 3:
-						userInfoDataBean.setPassword(data);
-						break;
-					case 4:			
-						userInfoDataBean.setHeadurl(data);
-						break;
-					case 5:			
-						userInfoDataBean.setPhone(data);
-						break;
-					case 6:			
-						userInfoDataBean.setSex(data);
-						break;
-					case 7:			
-						userInfoDataBean.setAddress(data);
-						break;
-					case 8:			
-						userInfoDataBean.setMoney(Integer.parseInt(data));
-						break;
-					case 9:			
-						userInfoDataBean.setSigna(data);
-						break;
-					case 10:			
-						userInfoDataBean.setMessagenum(Integer.parseInt(data));
-						break;
+		                case 1:
+		                	userInfoDataBean.setId(Integer.parseInt(data));
+		                	break;
+		                case 2:			
+		                	userInfoDataBean.setUsername(data);
+							break;
+						case 3:
+							userInfoDataBean.setPassword(data);
+							break;
+						case 4:			
+							userInfoDataBean.setHeadurl(data);
+							break;
+						case 5:			
+							userInfoDataBean.setPhone(data);
+							break;
+						case 6:			
+							userInfoDataBean.setSex(data);
+							break;
+						case 7:			
+							userInfoDataBean.setAddress(data);
+							break;
+						case 8:			
+							userInfoDataBean.setMoney(Integer.parseInt(data));
+							break;
+						case 9:			
+							userInfoDataBean.setSigna(data);
+							break;
+						case 10:			
+							userInfoDataBean.setMessagenum(Integer.parseInt(data));
+							break;
+						case 11:
+							userInfoDataBean.setLongitude(data);
+							break;
+						case 12:
+							userInfoDataBean.setLatitude(data);
+							break;
 					default:
 						break;
 					}
@@ -349,8 +357,9 @@ public class DaoUsers {
 	}
 	
 	//遍历用户信息
-	public static List<UserInfoDataBean> getUserList(String table) {
-		List<UserInfoDataBean> lUsers = new ArrayList<UserInfoDataBean>();
+	public static List<UserInfoBean> getUserList(String table) {
+		List<UserInfoBean> uInfoBeans = new ArrayList<UserInfoBean>();
+//		List<UserInfoDataBean> userInfoDataBeans = new ArrayList<UserInfoDataBean>();
 	    Connection conn = getConn();
 	    String sql = "select * from "+table+"";
 	    PreparedStatement pstmt;
@@ -359,6 +368,7 @@ public class DaoUsers {
 	        ResultSet rs = pstmt.executeQuery();
 	        int col = rs.getMetaData().getColumnCount();
 	        while (rs.next()) {
+	        	UserInfoBean userInfoBean = new UserInfoBean();
 	        	UserInfoDataBean users = new UserInfoDataBean();
 	        	for (int i = 1; i <= col; i++) {
 	                String data = rs.getString(i);
@@ -390,18 +400,30 @@ public class DaoUsers {
 					case 9:			
 						users.setSigna(data);
 						break;
-
+					case 10:			
+						users.setMessagenum(Integer.parseInt(data));
+						break;
+					case 11:
+						users.setLongitude(data);
+						break;
+					case 12:
+						users.setLatitude(data);
+						break;
 					default:
 						break;
 					}
 	        	}
-	        	lUsers.add(users);
+	        	userInfoBean.setData(users);
+	        	userInfoBean.setInfo("");
+	        	userInfoBean.setStatus(1);
+	        	uInfoBeans.add(userInfoBean);
+	        	
             }
 	       
 	    } catch (SQLException e) {
 	        e.printStackTrace();
 	    }
-	    return lUsers;
+	    return uInfoBeans;
 	}
 	
 	//登录判断
@@ -546,22 +568,22 @@ public class DaoUsers {
 	}
 	
 	//增加未读信息
-		public static int clearUnreadMessage(String table,int id) {
-		    Connection conn = getConn();
-		    int i = 0;
-		    String sql = "update "+table+" set messagenum = 0"+" where id = " + id;
-		    PreparedStatement pstmt;
-		    try {
-		        pstmt = (PreparedStatement) conn.prepareStatement(sql);
-		        i = pstmt.executeUpdate();
-		        System.out.println("resutl: " + i);
-		        pstmt.close();
-		        conn.close();
-		    } catch (SQLException e) {
-		        e.printStackTrace();
-		    }
-		    return i;
-		}
+	public static int clearUnreadMessage(String table,int id) {
+	    Connection conn = getConn();
+	    int i = 0;
+	    String sql = "update "+table+" set messagenum = 0"+" where id = " + id;
+	    PreparedStatement pstmt;
+	    try {
+	        pstmt = (PreparedStatement) conn.prepareStatement(sql);
+	        i = pstmt.executeUpdate();
+	        System.out.println("resutl: " + i);
+	        pstmt.close();
+	        conn.close();
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return i;
+	}
 	
 	//余额查询
 	public static int queryMoney(String table,int id) {
@@ -602,6 +624,24 @@ public class DaoUsers {
 		}else{
 			return false;
 		}
+	}
+	
+	//修改经度和纬度
+	public static int updateLocation(String table,int id,String longitude,String latitude) {
+	    Connection conn = getConn();
+	    int i = 0;
+	    String sql = "update "+table+" set longitude='" + longitude + "',latitude='"+ latitude +"' where id=" + id;
+	    PreparedStatement pstmt;
+	    try {
+	        pstmt = (PreparedStatement) conn.prepareStatement(sql);
+	        i = pstmt.executeUpdate();
+	        System.out.println("resutl: " + i);
+	        pstmt.close();
+	        conn.close();
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return i;
 	}
 	
 
